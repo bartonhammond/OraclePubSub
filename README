@@ -1,16 +1,16 @@
 This proof of concept project is to provide access to a Oracle database from a Node.js client.
 
 
-A java app is run from the command line and after subscribing for 2 channels 
-(query and storedProc) it waits for messages. When it receives a message, the
-message contains the query or storedProc information and arguments.  The oracle
-database is accessed and the data is published as JSONARRAY of JSONObjects.
+A java app is run from the command line and subscribes to 2 channels 
+(query and storedProc) with redis using lettuce client. It waits for messages. 
+When it receives a message, the message contains the query or storedProc 
+information and arguments.  The oracle database is accessed and the data is 
+published as JSONARRAY of JSONObjects.  It continues to wait for more messages.
 
-The redis node.js client has 2 subscribers and 2 publishers.  The publishers send
+The redis node.js client (oraclePubSub.js) has 2 subscribers and 2 publishers.  The publishers send
 query or storedProc requests.  The subscribers listen for the messages containing 
-the results.
-
-This was written so that Oracle can be access from node.js command line.  
+the results.  The test client (testPubSub.js) creates two requests and processes the responses.
+ 
 
 To run:
 
