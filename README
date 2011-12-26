@@ -30,6 +30,7 @@ To run:
 
        cd OraclePubSub\sql - define hr.get_emp_rs.sql in hr.schema.  Otherwise test will fail.
        
+       cd OraclePubSub\java
        mvn package
 
        cd target
