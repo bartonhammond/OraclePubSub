@@ -1,1 +1,43 @@
-Hello from readme!
+This proof of concept project is to provide access to a Oracle database from a Node.js client.
+
+
+A java app is run from the command line and after subscribing for 2 channels 
+(query and storedProc) it waits for messages. When it receives a message, the
+message contains the query or storedProc information and arguments.  The oracle
+database is accessed and the data is published as JSONARRAY of JSONObjects.
+
+The redis node.js client has 2 subscribers and 2 publishers.  The publishers send
+query or storedProc requests.  The subscribers listen for the messages containing 
+the results.
+
+This was written so that Oracle can be access from node.js command line.  
+
+To run:
+
+   Open new terminal window
+       Install node.js
+       Install redis-2.4.2 - (I used the windows binary https://github.com/dmajkic/redis) 
+                    - enter "redis-server"
+
+   Open new terminal window
+       Install redis - this is the node.js redis client use https://github.com/mranney/node_redis 
+              - just do "npm install redis"
+
+       git clone git://github.com/bartonhammond/OraclePubSub.git
+
+       cd OraclePubSub\java\src\main\java
+       edit jdbc.properites - this assumes the sample HR schema is available
+
+       cd OraclePubSub\sql - define hr.get_emp_rs.sql in hr.schema.  Otherwise test will fail.
+       
+       mvn package
+
+       cd target
+       enter "java -jar oraclepubsub-0.0.1-jar-with-dependencies.jar"  - This will hang waiting for messages.
+
+   Open different terminal window
+       cd OraclePubSub
+       node testPubSub.js
+
+
+
