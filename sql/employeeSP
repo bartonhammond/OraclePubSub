@@ -1,0 +1,27 @@
+CREATE OR REPLACE PROCEDURE EMPLOYEE_SELECT_BY_PK
+     ( 
+        p_EMPLOYEE_ID           IN  EMPLOYEES.EMPLOYEE_ID  ,                  
+        p_LASTNAME             OUT  EMPLOYEES.LASTNAME      , 
+        p_FIRSTNAME            OUT  EMPLOYEES.FIRSTNAME     , 
+        p_EMAIL                OUT  EMPLOYEES.MARITAL_STATUS_CODE                
+     ) 
+AS 
+BEGIN  
+    SELECT  
+           LASTNAME                      , 
+           FIRSTNAME                     , 
+           EMAIL           
+    INTO   
+           p_LASTNAME                      , 
+           p_FIRSTNAME                     , 
+           p_EMAIL           
+    FROM   EMPLOYEES
+    WHERE  EMPLOYE_ID  = p_EMPLOYEE_ID  ; 
+
+EXCEPTION 
+        WHEN OTHERS THEN 
+             RAISE_APPLICATION_ERROR (-20001, 
+                                      p_EMPLOYEE_ID || ':$:' || SQLERRM, TRUE) ; 
+
+END EMPLOYEES_SELECT_BY_PK ; 
+/
